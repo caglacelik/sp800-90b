@@ -271,7 +271,7 @@ pub mod test {
 
     #[test]
     pub fn test_collision_estimate() {
-        let bits Vec<i8> = vec![1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1,
+        let bits: Vec<i8> = vec![1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1,
         0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0];
         let min_entropy = collision_estimate(&bits);
 
