@@ -4,12 +4,12 @@ use std::f64::consts::E;
 use mathru::special::gamma::gamma_u;
 
 // LENGTH OF DIRECTIONAL RUNS
-pub fn length_of_directional_runs(sequence: &Vec<i32>) -> usize {
+pub fn length_of_directional_runs(sequence: &Vec<i8>) -> usize {
     // Step 1
     // Construct the sequence where:
     // if si > si+1 push -1 to s_bar
     // if si <= si+1 push 1 to s_bar
-    let s_bar = sequence.windows(2).map(|el| if el[0] <= el[1] { 1 } else { -1 }).collect::<Vec<i32>>();
+    let s_bar = sequence.windows(2).map(|el| if el[0] <= el[1] { 1 } else { -1 }).collect::<Vec<i8>>();
 
     // Test statistic T is the length of the longest run in s_bar
     // Compute runs
@@ -135,7 +135,7 @@ pub fn independence_for_non_binary_data(sequence: &Vec<usize>) -> (f64, usize) {
     }
 
 // THE COLLISION ESTIMATE
-pub fn collision_estimate(bits: &Vec<i32>) -> f64 {
+pub fn collision_estimate(bits: &Vec<i8>) -> f64 {
 
     // Step 1
     // index = 1
@@ -195,10 +195,10 @@ pub fn collision_estimate(bits: &Vec<i32>) -> f64 {
     let mut possible_x_bar_prime;
 
         for _ in 0..10_000 {
-            // get possible_x_bar_prime with avg
+            // get possible_x_bar_prime with mid_p
             possible_x_bar_prime = f_x_bar_prime(mid_p);
 
-            // p is greater than we haveHashMap
+            // p is greater than we have 
             if possible_x_bar_prime > x_bar_prime {
                 min_p = mid_p;
             }
@@ -222,15 +222,15 @@ pub fn collision_estimate(bits: &Vec<i32>) -> f64 {
         // min_entropy = -log2(p)
         // If the search does not yield a solution
         // min_entropy = log2(2) = 1
-        let min_entropy =  if t_len != 0 { -p.log2() } else { 1.0 };
+        let min_entropy =  if t_len != 0 && p < 1.0 && p > 0.5 { -p.log2() } else { 1.0 };
         
         println!("t: {:?}", t);
         println!("length of t: {}",t_len);
-        println!("mean: {}", mean );
-        println!("sigma hat: {}", sigma_hat);
-        println!("x bar prime: {}",  x_bar_prime);
-        println!("p: {}", p);
-        println!("min entropy: {}", min_entropy);
+        println!("mean: {:.4}", mean );
+        println!("sigma hat: {:.4}", sigma_hat);
+        println!("x bar prime: {:.4}",  x_bar_prime);
+        println!("p: {:.4}", p);
+        println!("min entropy: {:.4}", min_entropy);
 
         min_entropy
 
@@ -252,7 +252,7 @@ pub mod test {
 
     #[test]
     pub fn test_length_of_directional_runs() {
-        let input: Vec<i32> = vec![2, 2, 2, 5, 7, 7, 9, 3, 1, 4, 4];
+        let input: Vec<i8> = vec![2, 2, 2, 5, 7, 7, 9, 3, 1, 4, 4];
         let longest_run = length_of_directional_runs(&input);
 
         assert_eq!(longest_run, 6);
@@ -271,7 +271,7 @@ pub mod test {
 
     #[test]
     pub fn test_collision_estimate() {
-        let bits= vec![1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1,
+        let bits Vec<i8> = vec![1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1,
         0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0];
         let min_entropy = collision_estimate(&bits);
 

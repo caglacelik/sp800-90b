@@ -1,7 +1,7 @@
 use sp800_90b::*;
 
 fn main() {
-    let input: Vec<i32> = vec![2, 2, 2, 5, 7, 7, 9, 3, 1, 4, 4];
+    let input: Vec<i8> = vec![2, 2, 2, 5, 7, 7, 9, 3, 1, 4, 4];
     length_of_directional_runs(&input);
 
     let sequence: Vec<usize> = vec![2, 2, 3, 1, 3, 2, 3, 2, 1, 3, 1, 1, 2, 3, 1, 1, 2, 2, 2, 3, 3, 2, 3, 2, 3, 1, 2, 2, 3, 3,
