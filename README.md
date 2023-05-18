@@ -1,5 +1,5 @@
 # SP800_90b_tests
-Rust implementation of the tests below in SP800-90B
+Rust implementation of the tests below in [SP800-90B](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-90B.pdf)
 
 - 5.1.3  Length of Directional Runs
 
